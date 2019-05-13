@@ -37,7 +37,7 @@ class PhotoViewController: UIViewController {
 
     @IBAction func saveCheckButton(_ sender: UIButton) {
         let newFileName = String(format: "savephoto%03ld.png", 2)
-        let point = CGPoint.init(x: 100, y: 200)
+        let point = CGPoint.init(x: 100, y: 100)
 
         guard let inputText = inputText.text else {fatalError("inputText error") }
         guard let inPhotoImage = photoImage.image else {fatalError(" inPhotoImage error ") }
@@ -47,6 +47,7 @@ class PhotoViewController: UIViewController {
 
     }
     @IBAction func returnVCButton(_ sender: UIButton) {
+        self.deleteDirectory()
         dismiss(animated: true, completion: nil)
     }
 
@@ -73,6 +74,22 @@ class PhotoViewController: UIViewController {
         return documentsDirectory
     }
 
+    // MARK: Delete Directory
+    func deleteDirectory() {
+        let fileManager = FileManager.default
+        let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent("customDirectory")
+        if fileManager.fileExists(atPath: paths) {
+            // try! fileManager.removeItem(atPath: paths)
+            do {
+                try fileManager.removeItem(atPath: paths)
+            } catch {
+                print("Delete Directory error")
+            }
+        } else {
+            print("Something wronge.")
+        }
+    }
+
     func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint) -> UIImage {
         let textColor = UIColor.red
         let textFont = UIFont(name: "Helvetica Bold", size: 30)!
@@ -85,10 +102,10 @@ class PhotoViewController: UIViewController {
 
         let rect = CGRect(origin: point, size: image.size)
         text.draw(in: rect, withAttributes: textFontAttributes)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        guard let newImage = UIGraphicsGetImageFromCurrentImageContext() else { fatalError("newImage error") }
         UIGraphicsEndImageContext()
 
-        return newImage!
+        return newImage
     }
 }
 
