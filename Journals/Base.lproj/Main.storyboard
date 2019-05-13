@@ -105,6 +105,9 @@
                                     <constraint firstAttribute="height" constant="44" id="ybc-0a-fjz"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="closeButton"/>
+                                <connections>
+                                    <action selector="returnVCButton:" destination="fnS-ka-x3A" eventType="touchUpInside" id="vZS-La-acR"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5rb-iU-ogl">
                                 <rect key="frame" x="292" y="434" width="46" height="38"/>
@@ -113,6 +116,9 @@
                                     <constraint firstAttribute="width" constant="46" id="EpP-eN-6CF"/>
                                 </constraints>
                                 <state key="normal" title="Button" image="checkButton"/>
+                                <connections>
+                                    <action selector="saveCheckButton:" destination="fnS-ka-x3A" eventType="touchUpInside" id="COm-0L-Z0m"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fMo-Ek-a2j">
                                 <rect key="frame" x="113" y="562" width="160" height="45"/>
@@ -124,6 +130,9 @@
                                 <state key="normal" title="New Photo">
                                     <color key="titleColor" red="0.32156862749999998" green="0.25882352939999997" blue="0.58431372550000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="newPhotoButton:" destination="fnS-ka-x3A" eventType="touchUpInside" id="Obe-Fr-rI6"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -24,8 +24,31 @@ class PhotoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let orgFileName = String(format: "savephoto%03ld.png", 1)
+        ImagePhotoPicker.ImagePhotoHandler.getImage(filename: orgFileName, orgimage: photoImage)
+        let imagePAth = (self.getDirectoryPath() as NSString).appendingPathComponent(orgFileName)
+        print("PhotoViewimagePAth1 = \(imagePAth)")
+        photoImage.image = UIImage(contentsOfFile: imagePAth)
 
         // Do any additional setup after loading the view.
+    }
+
+    @IBAction func saveCheckButton(_ sender: UIButton) {
+        let newFileName = String(format: "savephoto%03ld.png", 2)
+//        ImagePhotoPicker.ImagePhotoHandler.saveImageDocumentDirectory(filename: newFileName, selectedImage: selectedImage)
+
+    }
+    
+    @IBAction func returnVCButton(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+
+    @IBAction func newPhotoButton(_ sender: UIButton) {
+        let newFileName = String(format: "savephoto%03ld.png", 2)
+        ImagePhotoPicker.ImagePhotoHandler.getImage(filename: newFileName, orgimage: photoImage)
+        let imagePAth = (self.getDirectoryPath() as NSString).appendingPathComponent(newFileName)
+        print("PhotoViewimagePAth1 = \(imagePAth)")
+        photoImage.image = UIImage(contentsOfFile: imagePAth)
     }
     /*
     // MARK: - Navigation
@@ -36,5 +59,11 @@ class PhotoViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    // MARK: PhotoViewController_Get Document Directory Path
+    func getDirectoryPath() -> String {
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
 
 }

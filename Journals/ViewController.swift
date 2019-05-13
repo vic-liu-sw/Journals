@@ -27,25 +27,31 @@ class ViewController: UIViewController {
 
     @IBAction func addPhoto(_ sender: UIButton) {
 
-        if let govc = storyboard?.instantiateViewController(withIdentifier: "newphoto") {
-            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
-                let imagePickerVC = UIImagePickerController()
-                // 設定相片的來源為行動裝置內的相本
-                imagePickerVC.sourceType = .photoLibrary
-                imagePickerVC.delegate = self
-
-                // 開啟照片
-                show(imagePickerVC, sender: self)
-
-            }
-            present( govc,animated: true, completion: {} )
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            let imagePickerVC = UIImagePickerController()
+            // 設定相片的來源為行動裝置內的相本
+            imagePickerVC.sourceType = .photoLibrary
+            imagePickerVC.delegate = self
+            // 開啟照片
+            show(imagePickerVC, sender: self)
         }
     }
 }
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-
-
-
-    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        // MARK: 取得拍下來的照片
+        guard let selectedImage = info[.originalImage] as? UIImage else {
+            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+        }
+        let fileName = String(format: "savephoto%03ld.png", 1)
+        print("selectedImage & fileName = \(selectedImage) + \(fileName)")
+        ImagePhotoPicker.ImagePhotoHandler.saveImageDocumentDirectory(filename: fileName, selectedImage: selectedImage)
+        dismiss(animated: true, completion: nil)
+        if let govc = storyboard?.instantiateViewController(withIdentifier: "newphoto") as? PhotoViewController {
+//            print("selectedImage = \(selectedImage)")
+//            govc.photoImage.image = selectedImage
+            present(govc, animated: true, completion: {})
+        }
+    }
 }
