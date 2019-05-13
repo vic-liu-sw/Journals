@@ -36,13 +36,12 @@ class PhotoViewController: UIViewController {
     }
 
     @IBAction func saveCheckButton(_ sender: UIButton) {
-      //  let newFileName = String(format: "savephoto%03ld.png", 2)
+        let newFileName = String(format: "savephoto%03ld.png", 2)
         let point = CGPoint.init(x: 100, y: 200)
         guard let inputText = inputText.text else {fatalError("inputText error") }
         guard let inPhotoImage = photoImage.image else {fatalError(" inPhotoImage error ") }
         let resultPhoto = textToImage(drawText: inputText, inImage: inPhotoImage, atPoint: point)
-        photoImage.image = resultPhoto
-      //  ImagePhotoPicker.ImagePhotoHandler.saveImageDocumentDirectory(filename: newFileName, selectedImage: resultPhoto)
+        ImagePhotoPicker.ImagePhotoHandler.saveImageDocumentDirectory(filename: newFileName, selectedImage: resultPhoto)
 
     }
     @IBAction func returnVCButton(_ sender: UIButton) {
@@ -75,13 +74,13 @@ class PhotoViewController: UIViewController {
     func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint) -> UIImage {
         let textColor = UIColor.red
         let textFont = UIFont(name: "Helvetica Bold", size: 30)!
-
+        var newtitleLabel = titleLabel.text
         let scale = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(image.size, false, scale)
 
         let textFontAttributes = [
             NSAttributedString.Key.font: textFont,
-            NSAttributedString.Key.foregroundColor: textColor,
+NSAttributedString.Key.foregroundColor: textColor,
             ] as [NSAttributedString.Key : Any]
         image.draw(in: CGRect(origin: CGPoint.zero, size: image.size))
 
@@ -93,8 +92,6 @@ class PhotoViewController: UIViewController {
 
         return newImage!
     }
-
-
 }
 
 extension PhotoViewController: UITextFieldDelegate {
