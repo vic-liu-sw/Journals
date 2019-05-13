@@ -21,14 +21,12 @@ class PhotoViewController: UIViewController {
     @IBOutlet var checkButton: UIButton!
 
     @IBOutlet var newPhoto: UIButton!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    
-
     /*
     // MARK: - Navigation
 

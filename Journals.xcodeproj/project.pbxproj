@@ -13,6 +13,7 @@
 		361CBDD62289129500ED75EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 361CBDD52289129500ED75EB /* Assets.xcassets */; };
 		361CBDD92289129500ED75EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 361CBDD72289129500ED75EB /* LaunchScreen.storyboard */; };
 		361CBDE22289217300ED75EB /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361CBDE12289217300ED75EB /* PhotoViewController.swift */; };
+		361CBDE6228930AE00ED75EB /* ImagePhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361CBDE5228930AE00ED75EB /* ImagePhotoPicker.swift */; };
 		683A289748C931CA4FB76A50 /* Pods_Journals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50302085D75BEC5C3F55F9FF /* Pods_Journals.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		361CBDD82289129500ED75EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		361CBDDA2289129500ED75EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		361CBDE12289217300ED75EB /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
+		361CBDE5228930AE00ED75EB /* ImagePhotoPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePhotoPicker.swift; sourceTree = "<group>"; };
 		3AA79766F936C129970F9625 /* Pods-Journals.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Journals.debug.xcconfig"; path = "Target Support Files/Pods-Journals/Pods-Journals.debug.xcconfig"; sourceTree = "<group>"; };
 		50302085D75BEC5C3F55F9FF /* Pods_Journals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Journals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D603D621FC9D0D14D33B5E31 /* Pods-Journals.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Journals.release.xcconfig"; path = "Target Support Files/Pods-Journals/Pods-Journals.release.xcconfig"; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 		361CBDC22289129000ED75EB = {
 			isa = PBXGroup;
 			children = (
+				361CBDE42289308500ED75EB /* DataModel */,
 				361CBDCD2289129000ED75EB /* Journals */,
 				361CBDCC2289129000ED75EB /* Products */,
 				293A2DB2115CDBD840BA70B9 /* Pods */,
@@ -81,6 +84,14 @@
 				361CBDDA2289129500ED75EB /* Info.plist */,
 			);
 			path = Journals;
+			sourceTree = "<group>";
+		};
+		361CBDE42289308500ED75EB /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				361CBDE5228930AE00ED75EB /* ImagePhotoPicker.swift */,
+			);
+			path = DataModel;
 			sourceTree = "<group>";
 		};
 		63DE1EC45365B5530DBF0819 /* Frameworks */ = {
@@ -206,6 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				361CBDE6228930AE00ED75EB /* ImagePhotoPicker.swift in Sources */,
 				361CBDD12289129000ED75EB /* ViewController.swift in Sources */,
 				361CBDCF2289129000ED75EB /* AppDelegate.swift in Sources */,
 				361CBDE22289217300ED75EB /* PhotoViewController.swift in Sources */,
