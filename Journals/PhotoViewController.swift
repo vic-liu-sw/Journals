@@ -24,21 +24,27 @@ class PhotoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         let orgFileName = String(format: "savephoto%03ld.png", 1)
         ImagePhotoPicker.ImagePhotoHandler.getImage(filename: orgFileName, orgimage: photoImage)
         let imagePAth = (self.getDirectoryPath() as NSString).appendingPathComponent(orgFileName)
         print("PhotoViewimagePAth1 = \(imagePAth)")
         photoImage.image = UIImage(contentsOfFile: imagePAth)
 
+        inputText.delegate = self
         // Do any additional setup after loading the view.
     }
 
     @IBAction func saveCheckButton(_ sender: UIButton) {
-        let newFileName = String(format: "savephoto%03ld.png", 2)
-//        ImagePhotoPicker.ImagePhotoHandler.saveImageDocumentDirectory(filename: newFileName, selectedImage: selectedImage)
+      //  let newFileName = String(format: "savephoto%03ld.png", 2)
+        let point = CGPoint.init(x: 100, y: 200)
+        guard let inputText = inputText.text else {fatalError("inputText error") }
+        guard let inPhotoImage = photoImage.image else {fatalError(" inPhotoImage error ") }
+        let resultPhoto = textToImage(drawText: inputText, inImage: inPhotoImage, atPoint: point)
+        photoImage.image = resultPhoto
+      //  ImagePhotoPicker.ImagePhotoHandler.saveImageDocumentDirectory(filename: newFileName, selectedImage: resultPhoto)
 
     }
-    
     @IBAction func returnVCButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
@@ -66,4 +72,67 @@ class PhotoViewController: UIViewController {
         return documentsDirectory
     }
 
+    func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint) -> UIImage {
+        let textColor = UIColor.red
+        let textFont = UIFont(name: "Helvetica Bold", size: 30)!
+
+        let scale = UIScreen.main.scale
+        UIGraphicsBeginImageContextWithOptions(image.size, false, scale)
+
+        let textFontAttributes = [
+            NSAttributedString.Key.font: textFont,
+            NSAttributedString.Key.foregroundColor: textColor,
+            ] as [NSAttributedString.Key : Any]
+        image.draw(in: CGRect(origin: CGPoint.zero, size: image.size))
+
+        let rect = CGRect(origin: point, size: image.size)
+        text.draw(in: rect, withAttributes: textFontAttributes)
+
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return newImage!
+    }
+
+
+}
+
+extension PhotoViewController: UITextFieldDelegate {
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        //結束輸入
+        if let inputContent = inputText.text,
+            inputContent.count > 0 {
+           inputText.text = inputContent
+        } else {
+            let alertController = UIAlertController(title: "Warning",
+                                                    message: "Please Enter Name！",
+                                                    preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK",
+                                         style: .default,
+                                         handler: { (action) in
+                                            // 補充 -->
+                                            self.inputText.becomeFirstResponder()  //可讓你編輯
+            })
+
+            inputText.resignFirstResponder()  //無法做編輯
+            alertController.addAction(okAction)
+            present(alertController,
+                    animated: true,
+                    completion: {
+                        print("Show Alert Message")
+            })
+        }
+    }
+
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        //開始輸入
+        return true
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // 結束編輯 把鍵盤隱藏起來
+        self.view.endEditing(true)
+        return true
+    }
 }
