@@ -28,7 +28,7 @@ class ImagePhotoPicker: NSObject {
         let fileManager = FileManager.default
         let imagePAth = (self.getDirectoryPath() as NSString).appendingPathComponent(filename)
         print("menuimagePAth = \(imagePAth)")
-        if fileManager.fileExists(atPath: imagePAth){
+        if fileManager.fileExists(atPath: imagePAth) {
             let image = UIImage(contentsOfFile: imagePAth)
             orgimage.image = image
             print("image檔案存在 = \(String(describing: image))")

@@ -55,7 +55,6 @@ class PhotoViewController: UIViewController {
         ImagePhotoPicker.ImagePhotoHandler.getImage(filename: newFileName, orgimage: photoImage)
         let imagePAth = (self.getDirectoryPath() as NSString).appendingPathComponent(newFileName)
         print("PhotoViewimagePAth1 = \(imagePAth)")
-
         photoImage.image = UIImage(contentsOfFile: imagePAth)
     }
     /*

@@ -49,8 +49,6 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         ImagePhotoPicker.ImagePhotoHandler.saveImageDocumentDirectory(filename: fileName, selectedImage: selectedImage)
         dismiss(animated: true, completion: nil)
         if let govc = storyboard?.instantiateViewController(withIdentifier: "newphoto") as? PhotoViewController {
-//            print("selectedImage = \(selectedImage)")
-//            govc.photoImage.image = selectedImage
             present(govc, animated: true, completion: {})
         }
     }
