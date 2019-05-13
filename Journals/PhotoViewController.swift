@@ -38,9 +38,11 @@ class PhotoViewController: UIViewController {
     @IBAction func saveCheckButton(_ sender: UIButton) {
         let newFileName = String(format: "savephoto%03ld.png", 2)
         let point = CGPoint.init(x: 100, y: 200)
+
         guard let inputText = inputText.text else {fatalError("inputText error") }
         guard let inPhotoImage = photoImage.image else {fatalError(" inPhotoImage error ") }
-        let resultPhoto = textToImage(drawText: inputText, inImage: inPhotoImage, atPoint: point)
+        let newinputText  = titleLabel.text! + "\n" + inputText
+        let resultPhoto = textToImage(drawText: newinputText, inImage: inPhotoImage, atPoint: point)
         ImagePhotoPicker.ImagePhotoHandler.saveImageDocumentDirectory(filename: newFileName, selectedImage: resultPhoto)
 
     }
@@ -53,6 +55,7 @@ class PhotoViewController: UIViewController {
         ImagePhotoPicker.ImagePhotoHandler.getImage(filename: newFileName, orgimage: photoImage)
         let imagePAth = (self.getDirectoryPath() as NSString).appendingPathComponent(newFileName)
         print("PhotoViewimagePAth1 = \(imagePAth)")
+
         photoImage.image = UIImage(contentsOfFile: imagePAth)
     }
     /*
@@ -74,19 +77,15 @@ class PhotoViewController: UIViewController {
     func textToImage(drawText text: String, inImage image: UIImage, atPoint point: CGPoint) -> UIImage {
         let textColor = UIColor.red
         let textFont = UIFont(name: "Helvetica Bold", size: 30)!
-        var newtitleLabel = titleLabel.text
         let scale = UIScreen.main.scale
         UIGraphicsBeginImageContextWithOptions(image.size, false, scale)
 
         let textFontAttributes = [
-            NSAttributedString.Key.font: textFont,
-NSAttributedString.Key.foregroundColor: textColor,
-            ] as [NSAttributedString.Key : Any]
+            NSAttributedString.Key.font: textFont,NSAttributedString.Key.foregroundColor: textColor,] as [NSAttributedString.Key: Any]
         image.draw(in: CGRect(origin: CGPoint.zero, size: image.size))
 
         let rect = CGRect(origin: point, size: image.size)
         text.draw(in: rect, withAttributes: textFontAttributes)
-
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
